@@ -22,11 +22,13 @@
 \usepackage[english]{babel}
 \usepackage[
   backend     = biber,
+  citestyle   = authoryear,
   doi         = true,
   hyperref    = true,
   maxbibnames = 99,
+  natbib      = true,
   sortlocale  = en_US,
-  style       = numeric,
+  style       = authoryear,
 ]{biblatex}
 \usepackage{booktabs}
 \usepackage{color, colortbl}
@@ -34,7 +36,7 @@
 \usepackage{efbox}
 \usepackage{enumitem}
 \usepackage[shortcuts]{extdash} % use `\-/' to hyphenate words/phrases that have a dash in them
-\usepackage[tt=false]{libertine} % libertine's \ttfamily isn't that great
+% \usepackage[tt=false]{libertine} % libertine's \ttfamily isn't that great
 \usepackage[T1]{fontenc} % load fonts before fontenc
 \usepackage[symbol]{footmisc}
 \usepackage[
@@ -73,7 +75,7 @@
 \setlength\bibitemsep{0.5\baselineskip}                 % add a line between entries
 \AtEveryBibitem{\iffieldundef{doi}{}{\clearfield{url}}} % if DOI, hide URL
 
-\addbibresource{paper.bib}
+% \addbibresource{paper.bib}
 
 % pkg: siunitx
 % some guidelines https://physics.nist.gov/cuu/Units/checklist.html
@@ -124,6 +126,110 @@
 \renewcommand{\showlabelsetlabel}[1]{\efbox{\showlabelfont #1}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% sboysel customization %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[margin=1in]{geometry}
+%\usepackage{lipsum}
+%\usepackage{abstract}
+%\usepackage[T1]{fontenc}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amsthm}
+%\usepackage{amsmath}
+%\usepackage{bm}
+%\usepackage{bbm}
+%\usepackage{breqn}
+%\usepackage{epigraph}
+%\usepackage{tikz}
+%\usepackage{tikz-network}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.18}
+%\usepackage{xcolor}
+%\usepackage{setspace}
+%\usepackage[titles]{tocloft}
+%\setcounter{tocdepth}{2}
+%\usepackage{enumitem}
+%\usepackage[mathscr]{euscript}
+%\usepackage{subcaption}
+%\usepackage{graphicx}
+\usepackage{subfiles}
+%\usepackage[round]{natbib}
+%\usepackage{hyperref}
+%\hypersetup{
+%    colorlinks=true,
+%    linkcolor=blue,
+%    citecolor=blue,
+%    anchorcolor=blue,
+%    filecolor=magenta,
+%    urlcolor=cyan,
+%    pdftitle={Digital Supply Chains [Boysel 2022]}
+%}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1em}
+%\usepackage{titlesec}
+%\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+%\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+%\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+%\usepackage{fancyhdr}
+%\usepackage{caption}
+%%\captionsetup[table]{skip=10pt}
+%\usepackage{tabularx}
+%\usepackage{threeparttable}
+%\usepackage{array}
+%\newcolumntype{Y}{>{\centering\arraybackslash}X}
+%\newcolumntype{d}[1]{D{.}{.}{#1}} 
+%\usepackage{booktabs}
+%\usepackage{lastpage}
+
+%%% Theorem Environments
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{acknowledgement}{Acknowledgement}
+%\newtheorem{assumption}{Assumption}
+%\newtheorem{algorithm}[theorem]{Algorithm}
+%\newtheorem{axiom}[theorem]{Axiom}
+%\newtheorem{case}[theorem]{Case}
+%\newtheorem{claim}[theorem]{Claim}
+%\newtheorem{conclusion}[theorem]{Conclusion}
+%%\newtheorem{condition}[theorem]{Condition}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{criterion}[theorem]{Criterion}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%\newtheorem{exercise}[theorem]{Exercise}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{notation}[theorem]{Notation}
+%\newtheorem{problem}[theorem]{Problem}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem*{remark}{Remark}
+%\newtheorem{solution}[theorem]{Solution}
+%\newtheorem{summary}[theorem]{Summary}
+
+%%% New Macros
+%\renewcommand\qed{$\blacksquare$}
+%\newcommand{\st}{\, s.t. \,}
+%\newcommand{\grad}{\bigtriangledown}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+%\DeclareMathOperator*{\argmin}{arg\,min}
+%\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+
+%% URLs %%%
+\urldef\urllibiosourcerank\url{https://docs.libraries.io/overview.html#sourcerank}
+
+\newif\ifdissertation
+\dissertationtrue     % (or \dissertationfalse for the standalone)
+
+%% Bibliography %%%
+\addbibresource{../intro/references.bib}
+\addbibresource{../pub-goods/references.bib}
+\addbibresource{../formation/references.bib}
+
+%% Figures %%%
+\graphicspath{{../pub-goods/figures}}
+\graphicspath{{../formation/figures}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%% front matter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
@@ -161,11 +267,10 @@
 \end{preface}
 
 %%% introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Introduction}
-  \label{ch:introduction}
+\chapter{Introduction}\label{ch:introduction}
 
 \graphicspath{}
-\input{introduction.tex}
+\input{../intro/intro.tex}
 
 %%% chapter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -224,71 +329,118 @@
 %   subsubsection titles
 % - when chapter numbers are double digits
 
-\chapter{This is a very long title which will take up more than one line
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ultrices vitae
-auctor eu augue ut lectus arcu. Enim nunc faucibus a pellentesque sit
-amet porttitor eget. Consequat mauris nunc congue nisi vitae.}
-  \label{ch:long-title}
+% \chapter{This is a very long title which will take up more than one line
+% lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+% tempor incididunt ut labore et dolore magna aliqua. Ultrices vitae
+% auctor eu augue ut lectus arcu. Enim nunc faucibus a pellentesque sit
+% amet porttitor eget. Consequat mauris nunc congue nisi vitae.}
+%   \label{ch:long-title}
 
-\section{Ut enim ad minim veniam, quis nostrud exercitation ullamco
-laboris nisi ut aliquip ex ea commodo consequat}
+% \section{Ut enim ad minim veniam, quis nostrud exercitation ullamco
+% laboris nisi ut aliquip ex ea commodo consequat}
 
-\subsection{Duis aute irure dolor in reprehenderit in voluptate velit
-esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-id est laborum.}
+% \subsection{Duis aute irure dolor in reprehenderit in voluptate velit
+% esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+% cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+% id est laborum.}
 
-\subsubsection{Etiam erat velit scelerisque in dictum non. Sit amet
-justo donec enim diam. Amet justo donec enim diam. Metus vulputate eu
-scelerisque felis imperdiet proin. In nulla posuere sollicitudin aliquam
-ultrices. Turpis in eu mi bibendum.}
+% \subsubsection{Etiam erat velit scelerisque in dictum non. Sit amet
+% justo donec enim diam. Amet justo donec enim diam. Metus vulputate eu
+% scelerisque felis imperdiet proin. In nulla posuere sollicitudin aliquam
+% ultrices. Turpis in eu mi bibendum.}
 
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Lorem Ipsum}
-\chapter{Etiam erat velit scelerisque in dictum non. Sit amet
-justo donec enim diam. Amet justo donec enim diam. Metus vulputate eu
-scelerisque felis imperdiet proin. In nulla posuere sollicitudin aliquam
-ultrices. Turpis in eu mi bibendum.}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Lorem Ipsum}
+% \chapter{Etiam erat velit scelerisque in dictum non. Sit amet
+% justo donec enim diam. Amet justo donec enim diam. Metus vulputate eu
+% scelerisque felis imperdiet proin. In nulla posuere sollicitudin aliquam
+% ultrices. Turpis in eu mi bibendum.}
 
-\begin{table}
-\centering
-\begin{tabular}{lS}
-\toprule
-$x$      & \textbf{value} \\
-\midrule
-a        & 1.23           \\
-b        & 3.456          \\
-c        & 100.0002       \\
-d        & 12345.0        \\
-\bottomrule
-\end{tabular}
-\caption[In hendrerit gravida rutrum quisque non tellus orci ac. Iaculis
-        urna id volutpat lacus laoreet non curabitur gravida arcu. Mauris
-        ultrices eros in cursus turpis massa. Sed tempus urna et pharetra
-        pharetra massa massa. Eget sit amet tellus cras adipiscing enim eu
-        turpis egestas. Morbi blandit cursus risus at ultrices.]
-        {In hendrerit gravida rutrum quisque non tellus orci ac. Iaculis
-        urna id volutpat lacus laoreet non curabitur gravida arcu.
-        Mauris ultrices eros in cursus turpis massa. Sed tempus urna et
-        pharetra pharetra massa massa. Eget sit amet tellus cras
-        adipiscing enim eu turpis egestas. Morbi blandit cursus risus at
-        ultrices.}
-\label{tbl:example-2}
-\end{table}
+% \begin{table}
+% \centering
+% \begin{tabular}{lS}
+% \toprule
+% $x$      & \textbf{value} \\
+% \midrule
+% a        & 1.23           \\
+% b        & 3.456          \\
+% c        & 100.0002       \\
+% d        & 12345.0        \\
+% \bottomrule
+% \end{tabular}
+% \caption[In hendrerit gravida rutrum quisque non tellus orci ac. Iaculis
+%         urna id volutpat lacus laoreet non curabitur gravida arcu. Mauris
+%         ultrices eros in cursus turpis massa. Sed tempus urna et pharetra
+%         pharetra massa massa. Eget sit amet tellus cras adipiscing enim eu
+%         turpis egestas. Morbi blandit cursus risus at ultrices.]
+%         {In hendrerit gravida rutrum quisque non tellus orci ac. Iaculis
+%         urna id volutpat lacus laoreet non curabitur gravida arcu.
+%         Mauris ultrices eros in cursus turpis massa. Sed tempus urna et
+%         pharetra pharetra massa massa. Eget sit amet tellus cras
+%         adipiscing enim eu turpis egestas. Morbi blandit cursus risus at
+%         ultrices.}
+% \label{tbl:example-2}
+% \end{table}
 
-%%% conclusions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Conclusions}
-  \label{ch:conclusions}
+\chapter{Quid Pro Code}\label{ch:pub-goods}
 
-\graphicspath{}
-\input{conclusions}
+\section{Introduction} \label{sec:intro}
+\subfile{../pub-goods/intro/intro.tex}
+
+% \section{Background} \label{sec:background}
+% \subfile{../pub-goods/background/background.tex}
+
+% \section{Related Literature} \label{sec:lit}
+% \subfile{lit/lit.tex}
+
+% \section{Data} \label{sec:data}
+% \subfile{data/data.tex}
+
+% \section{Reduced Form} \label{sec:reduced}
+% \subfile{reduced/reduced.tex}
+
+% \section{Structural Model} \label{sec:structural}
+% \subfile{struct/struct.tex}
+
+% \section{Discussion} \label{sec:discussion}
+% \subfile{discussion/discussion.tex}
+
+
+% \clearpage
+% \appendix
+% \section{Tables} \label{app:tables}
+% \subfile{appendix/tables/tables.tex}
+
+% \clearpage
+% \section{Figures} \label{app:figures}
+% \subfile{appendix/figures/figures.tex}
+
+% \clearpage
+% \section{Data Details} \label{app:data}
+% \subfile{appendix/data/data.tex}
+
+% \clearpage
+% \onehalfspacing
+% \section{Additional Reduced Form Results} \label{app:reduced-details}
+% \subfile{appendix/reduced-details/reduced-details.tex}
+
+% \clearpage
+% \onehalfspacing
+% \section{Structural Estimation Details} \label{app:estim-details}
+% \subfile{appendix/estim/estim.tex}
+
+% %%% conclusions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter{Conclusions}
+%   \label{ch:conclusions}
+
+% \graphicspath{}
+% \input{conclusions}
 
 %%% bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
