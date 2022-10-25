@@ -38,7 +38,8 @@
 \usepackage[shortcuts]{extdash} % use `\-/' to hyphenate words/phrases that have a dash in them
 % \usepackage[tt=false]{libertine} % libertine's \ttfamily isn't that great
 \usepackage[T1]{fontenc} % load fonts before fontenc
-\usepackage[symbol]{footmisc}
+%\usepackage[symbol]{footmisc}
+\usepackage{footmisc}
 \usepackage[
   showframe = false,% draw a border around textwidth
   pass      = true, % force 8.5"x11" pagesize
@@ -62,6 +63,7 @@
 \usepackage{url}
 
 \usepackage[
+  bookmarks     = true,
   breaklinks    = true,
   colorlinks    = true,
   hypertexnames = false,
@@ -131,27 +133,24 @@
 %\usepackage[margin=1in]{geometry}
 %\usepackage{lipsum}
 %\usepackage{abstract}
-%\usepackage[T1]{fontenc}
-%\usepackage{amsfonts}
+\usepackage{amsfonts}
 %\usepackage{amssymb}
-%\usepackage{amsthm}
+\usepackage{amsthm}
 %\usepackage{amsmath}
-%\usepackage{bm}
-%\usepackage{bbm}
-%\usepackage{breqn}
-%\usepackage{epigraph}
-%\usepackage{tikz}
-%\usepackage{tikz-network}
-%\usepackage{pgfplots}
-%\pgfplotsset{compat=1.18}
-%\usepackage{xcolor}
-%\usepackage{setspace}
-%\usepackage[titles]{tocloft}
-%\setcounter{tocdepth}{2}
-%\usepackage{enumitem}
-%\usepackage[mathscr]{euscript}
-%\usepackage{subcaption}
-%\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{breqn}
+\usepackage{epigraph}
+\usepackage{tikz}
+\usepackage{tikz-network}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage[mathscr]{euscript}
+\usepackage{subcaption}
+\usepackage{graphicx}
 \usepackage{subfiles}
 %\usepackage[round]{natbib}
 %\usepackage{hyperref}
@@ -171,20 +170,20 @@
 %\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 %\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 %\usepackage{fancyhdr}
-%\usepackage{caption}
+\usepackage{caption}
 %%\captionsetup[table]{skip=10pt}
-%\usepackage{tabularx}
-%\usepackage{threeparttable}
-%\usepackage{array}
-%\newcolumntype{Y}{>{\centering\arraybackslash}X}
-%\newcolumntype{d}[1]{D{.}{.}{#1}} 
-%\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{array}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{d}[1]{D{.}{.}{#1}} 
+\usepackage{booktabs}
 %\usepackage{lastpage}
 
 %%% Theorem Environments
-%\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[section]
 %\newtheorem{acknowledgement}{Acknowledgement}
-%\newtheorem{assumption}{Assumption}
+\newtheorem{assumption}{Assumption}
 %\newtheorem{algorithm}[theorem]{Algorithm}
 %\newtheorem{axiom}[theorem]{Axiom}
 %\newtheorem{case}[theorem]{Case}
@@ -195,23 +194,24 @@
 %\newtheorem{corollary}[theorem]{Corollary}
 %\newtheorem{criterion}[theorem]{Criterion}
 %\newtheorem{definition}[theorem]{Definition}
-%\newtheorem{example}[theorem]{Example}
+\newtheorem{example}[theorem]{Example}
 %\newtheorem{exercise}[theorem]{Exercise}
 %\newtheorem{lemma}[theorem]{Lemma}
 %\newtheorem{notation}[theorem]{Notation}
 %\newtheorem{problem}[theorem]{Problem}
-%\newtheorem{proposition}{Proposition}
-%\newtheorem*{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{remark}{Remark}
 %\newtheorem{solution}[theorem]{Solution}
 %\newtheorem{summary}[theorem]{Summary}
 
 %%% New Macros
-%\renewcommand\qed{$\blacksquare$}
-%\newcommand{\st}{\, s.t. \,}
-%\newcommand{\grad}{\bigtriangledown}
-%\DeclareMathOperator*{\argmax}{arg\,max}
-%\DeclareMathOperator*{\argmin}{arg\,min}
-%\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+\renewcommand\qed{$\blacksquare$}
+\newcommand{\st}{\, s.t. \,}
+\newcommand{\grad}{\bigtriangledown}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+\newcommand{\Cov}{\mathrm{Cov}}
 
 %% URLs %%%
 \urldef\urllibiosourcerank\url{https://docs.libraries.io/overview.html#sourcerank}
@@ -219,14 +219,35 @@
 \newif\ifdissertation
 \dissertationtrue     % (or \dissertationfalse for the standalone)
 
+%% chapter appendices %%%
+%%%% source: https://tex.stackexchange.com/q/120716/188684
+
+\usepackage[titles]{tocloft}
+%\setcounter{tocdepth}{2}
+\usepackage{appendix}
+\usepackage{chngcntr}
+\usepackage{etoolbox}
+
+% Start of subappendices environment
+\AtBeginEnvironment{subappendices}{%
+\chapter*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+}
+% End of subappendices environment
+\AtEndEnvironment{subappendices}{%
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+}
+
 %% Bibliography %%%
 \addbibresource{../intro/references.bib}
 \addbibresource{../pub-goods/references.bib}
 \addbibresource{../formation/references.bib}
 
 %% Figures %%%
-\graphicspath{{../pub-goods/figures}}
-\graphicspath{{../formation/figures}}
+\graphicspath{{../pub-goods/figures/}{../formation/figures/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -258,6 +279,12 @@
   {
   \hypersetup{hidelinks} % color all links black in the preface
   \tableofcontents
+  % fix numwidth for subappendix figs/tables
+  \makeatletter
+    \def\l@table{\@dottedtocline{1}{1em}{4em}}
+    \def\l@figure{\@dottedtocline{1}{1em}{4em}}
+    \onehalfspacing
+  \makeatother
   \listoftables
   \listoffigures
   }
@@ -269,7 +296,7 @@
 %%% introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}\label{ch:introduction}
 
-\graphicspath{}
+%\graphicspath{}
 \input{../intro/intro.tex}
 
 %%% chapter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -388,52 +415,104 @@
 % \label{tbl:example-2}
 % \end{table}
 
-\chapter{Quid Pro Code}\label{ch:pub-goods}
+%%% chapter 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction} \label{sec:intro}
+\chapter{Quid Pro Code: Peer Effects and Productivity in Open Source Software}
+\label{ch:pg}
+
+\section{Introduction} \label{sec:pg-intro}
 \subfile{../pub-goods/intro/intro.tex}
 
-% \section{Background} \label{sec:background}
-% \subfile{../pub-goods/background/background.tex}
+\section{Background} \label{sec:pg-background}
+\subfile{../pub-goods/background/background.tex}
 
-% \section{Related Literature} \label{sec:lit}
-% \subfile{lit/lit.tex}
+\section{Related Literature} \label{sec:pg-lit}
+\subfile{../pub-goods/lit/lit.tex}
 
-% \section{Data} \label{sec:data}
-% \subfile{data/data.tex}
+\section{Data} \label{sec:pg-data}
+\subfile{../pub-goods/data/data.tex}
 
-% \section{Reduced Form} \label{sec:reduced}
-% \subfile{reduced/reduced.tex}
+\section{Reduced Form} \label{sec:pg-reduced}
+\subfile{../pub-goods/reduced/reduced.tex}
 
-% \section{Structural Model} \label{sec:structural}
-% \subfile{struct/struct.tex}
+\section{Structural Model} \label{sec:pg-structural}
+\subfile{../pub-goods/struct/struct.tex}
 
-% \section{Discussion} \label{sec:discussion}
-% \subfile{discussion/discussion.tex}
+\section{Discussion} \label{sec:pg-discussion}
+\subfile{../pub-goods/discussion/discussion.tex}
 
+\clearpage
+\begin{subappendices}
+\section{Tables} \label{app:pg-tables}
+\subfile{../pub-goods/appendix/tables/tables.tex}
 
-% \clearpage
-% \appendix
-% \section{Tables} \label{app:tables}
-% \subfile{appendix/tables/tables.tex}
+\clearpage
+\section{Figures} \label{app:pg-figures}
+\subfile{../pub-goods/appendix/figures/figures.tex}
 
-% \clearpage
-% \section{Figures} \label{app:figures}
-% \subfile{appendix/figures/figures.tex}
+\clearpage
+\section{Data Details} \label{app:pg-data-app}
+\subfile{../pub-goods/appendix/data/data.tex}
 
-% \clearpage
-% \section{Data Details} \label{app:data}
-% \subfile{appendix/data/data.tex}
+\clearpage
+\onehalfspacing
+\section{Additional Reduced Form Results} \label{app:pg-reduced-details}
+\subfile{../pub-goods/appendix/reduced-details/reduced-details.tex}
 
-% \clearpage
-% \onehalfspacing
-% \section{Additional Reduced Form Results} \label{app:reduced-details}
-% \subfile{appendix/reduced-details/reduced-details.tex}
+\clearpage
+\onehalfspacing
+\section{Structural Estimation Details} \label{app:pg-estim-details}
+\subfile{../pub-goods/appendix/estim/estim.tex}
 
-% \clearpage
-% \onehalfspacing
-% \section{Structural Estimation Details} \label{app:estim-details}
-% \subfile{appendix/estim/estim.tex}
+\end{subappendices}
+
+%%% chapter 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{No Free Lunch For Programmers: Digital Supply Chains and the Economics of Software Dependency Management}
+\label{ch:dsc}
+
+\section{Introduction}\label{sec:dsc-intro}
+\subfile{../formation/intro/intro}
+
+\section{Literature}\label{sec:dsc-lit}
+\subfile{../formation/lit/lit}
+
+\section{Framework}\label{sec:dsc-framework}
+\subfile{../formation/framework/framework}
+
+\section{Data}\label{sec:pg-data}
+\subfile{../formation/data/data}
+
+\section{Reduced Form}\label{sec:dsc-reduced}
+\subfile{../formation/reduced/reduced}
+
+\section{Structural Approach}\label{sec:dsc-structural}
+\subfile{../formation/structural/structural}
+
+\section{Counterfactual Analysis}\label{sec:dsc-counterfactual}
+\subfile{../formation/counterfactual/counterfactual}
+
+\section{Discussion}\label{sec:dsc-discussion}
+\subfile{../formation/discussion/discussion}
+
+\clearpage
+\begin{subappendices}
+\section{Figures}\label{app:dsc-figures}
+\subfile{../formation/appendix/figures/figures.tex}
+
+\clearpage
+\section{Tables}\label{app:dsc-tables}
+\subfile{../formation/appendix/tables/tables.tex}
+
+\clearpage
+\section{Mathematical Details}\label{app:dsc-math}
+\subfile{../formation/appendix/math/math.tex}
+
+\clearpage
+\section{Estimation Details}\label{app:dsc-estimation}
+\subfile{../formation/appendix/estimation/estimation.tex}
+
+\end{subappendices}
 
 % %%% conclusions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Conclusions}
