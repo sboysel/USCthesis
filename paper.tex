@@ -107,7 +107,7 @@
 %%% draft mode / toggle commands %%%
 \usepackage{etoolbox}
 \newtoggle{draft}
-\settoggle{draft}{true} % change toggle for draft or final versions
+\settoggle{draft}{false} % change toggle for draft or final versions
 
 \iftoggle{draft}{
   % if 'draft' toggle is true
@@ -279,6 +279,10 @@ THE LENS OF MICROECONOMICS}
 
   {
   \hypersetup{hidelinks} % color all links black in the preface
+  \makeatletter
+    %\def\l@chapter{\@dottedtocline{1}{1em}{1em}}
+    \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+  \makeatother
   \tableofcontents
   % fix numwidth for subappendix figs/tables
   \makeatletter
